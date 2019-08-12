@@ -59,7 +59,7 @@ router.get("/zipcode/:ZIPCODE/:GASTYPE", async function(req, res, next) {
     let gasType = getGasType(GASTYPE, res);
 
   await getGasStations(ZIPCODE, gasType);
-  console.log("SHOULD FUCKING WORK with gas types", result);
+  console.log("SHOULD WORK with gas types", result);
   res.send(result);
   next();
 });
