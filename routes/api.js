@@ -17,8 +17,7 @@ router.get("/", function(req, res, next) {
 */
 router.get("/zipcode/:ZIPCODE", async function(req, res, next) {
   await getZipCode(req.params.ZIPCODE, 0);
-  //TODO do something about profanity later
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!SHOULD FUCKING WORK ", result);
+  //display response/results to page
   res.send(result);
 });
 
@@ -46,18 +45,14 @@ router.get("/zipcode/:ZIPCODE/:GASTYPE", async function(req, res, next) {
     res.send({ status: "NEW TYPE OF GAS WOW!?!?!?" });
   }
 
-  // Make a request for a user with a given ID
-  // res.send(getZipCode(req.params.ZIPCODE));
-
-  //TODO Comment out later
   await getZipCode(req.params.ZIPCODE, gasType);
   console.log("SHOULD FUCKING WORK with gas types", result);
   res.send(result);
-  //   next();
 });
 
 /**
  * ! Gets the brands
+ * TODO figure out what this actually is getting
  */
 router.get("/brands", async function(req, res, next) {
   try {
@@ -84,7 +79,7 @@ async function getZipCode(ZIPCODE, GASTYPE) {
     result = response.data;
   } catch (error) {
     console.error(error);
-    return "EVERYTHING WENT TO SHIT";
+    return "EVERYTHING WENT TO poop";
   }
 }
 
