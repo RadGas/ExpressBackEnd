@@ -11,17 +11,19 @@ router.get("/", function(req, res, next) {
 });
 
 /* 
-* only for /zipcode/#
+TODO Unfinished
+* only for /city/CITYNAME/gastype
 !Gets gas stations based on zipcode
 ? Be warned this works somehow :)
 */
-router.get("/zipcode/:ZIPCODE", async function(req, res, next) {
-  await getZipCode(req.params.ZIPCODE, 0);
+router.get("/city/:CITY", async function(req, res, next) {
+  await getGasStations(req.params.CITY, 0);
   //display response/results to page
   res.send(result);
 });
 
 /* 
+TODO make gas type checking a method
 * only for /zipcode/#/gastype
 !Gets gas stations based on zipcode
 ? Be warned this works somehow :)
@@ -45,7 +47,7 @@ router.get("/zipcode/:ZIPCODE/:GASTYPE", async function(req, res, next) {
     res.send({ status: "NEW TYPE OF GAS WOW!?!?!?" });
   }
 
-  await getZipCode(req.params.ZIPCODE, gasType);
+  await getGasStations(req.params.ZIPCODE, gasType);
   console.log("SHOULD FUCKING WORK with gas types", result);
   res.send(result);
 });
@@ -63,13 +65,32 @@ router.get("/brands", async function(req, res, next) {
     res.send(response.data);
   } catch (error) {
     console.error(error);
-    return "EVERYTHING WENT TO SHIT";
+    return "EVERYTHING WENT TO poop";
   }
 });
 
-// *helper function to retrieve zipcode gas info
-async function getZipCode(ZIPCODE, GASTYPE) {
-  let endpoint = `https://www.gasbuddy.com/assets-v2/api/stations?search=${ZIPCODE}`;
+/**
+ * ! Gets the prices of the gas station
+ * About: Gets the prices of the fuel types
+ */
+router.get("/gasstation/:GASSTATIONID", async function(req, res, next) {
+  try {
+    const response = await axios.get(
+      `https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=${
+        req.params.GASSTATIONID
+      }`
+    );
+
+    res.send(response.data);
+  } catch (error) {
+    console.error(error);
+    return "EVERYTHING WENT TO poops";
+  }
+});
+
+// *helper function to retrieve zipcode or city gas station info
+async function getGasStations(ZIPorCITY, GASTYPE) {
+  let endpoint = `https://www.gasbuddy.com/assets-v2/api/stations?search=${ZIPorCITY}`;
   if (GASTYPE) {
     endpoint += `&fuel=${GASTYPE}`;
   }
