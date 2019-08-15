@@ -161,19 +161,28 @@ router.get("/trends", async function(req, res, next) {
  * TODO and this https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=52090&stationIds=52092&stationIds=123210&stationIds=149725&stationIds=52091&stationIds=150088&stationIds=95618&stationIds=137383&stationIds=52098&stationIds=113088
  * About: Gets the prices of the fuel types
  */
-router.get("/gasstation/:GASSTATIONID", async function(req, res, next) {
+router.get("/gasstation", async function(req, res, next) {
   try {
-    const { GASSTATIONID } = req.params;
-    const response = await axios.get(
-      `https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=${GASSTATIONID}`
-    );
-
+    let amountOfStations = 0;
+    let url = `https://www.gasbuddy.com/assets-v2/api/fuels`;
+    if (req.query.stationIds) {
+      amountOfStations = req.query.stationIds;
+      url += `?stationIds=${req.query.stationIds[0]}`;
+    }
+    for (i = 1; i < req.query.stationIds.length; i++) {
+      url += `&stationIds=${req.query.stationIds[i]}`;
+    }
+    const response = await axios.get(url);
+    if ((amount = req.query.highestPrice)) {
+      response = response.data.filter(function(amount) {
+        return response.data.fuels.prices.price <= amount;
+      });
+    }
     res.send(response.data);
   } catch (error) {
     console.error(error);
     return "EVERYTHING WENT TO poops";
   }
-  next();
 });
 
 // *helper function to retrieve zipcode or city gas station info
