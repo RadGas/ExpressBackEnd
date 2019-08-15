@@ -62,12 +62,11 @@ function getGasType(GASTYPE, res) {
 router.get("/zipcode/:ZIPCODE", async function(req, res, next) {
   // res.send(req.query);
   const { ZIPCODE } = req.params;
-  let gasType = getGasType(req.params.fuel, res);
+  let gasType = getGasType(req.query.fuel, res);
 
   await getGasStations(ZIPCODE, gasType, req.query.brandId, req.query.maxAge);
   console.log("SHOULD WORK with gas types", result);
   res.send(result);
-  next();
 });
 
 /**
@@ -127,7 +126,6 @@ router.get("/trends/:ZIPorCity", async function(req, res, next) {
     console.error(error);
     return "EVERYTHING WENT TO poop";
   }
-  next();
 });
 
 /**

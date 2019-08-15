@@ -22,6 +22,14 @@ Host : /assets-v2/api/trends?lat=25.8925211&lng=-80.3352364
 
 Ours : http://localhost:3000/api/trends?lat=25.8925211&lng=-80.3352364
 
+# ZipCode :
+
+#### Get gas stations at zipcode with advanced search
+
+Host : assets-v2/api/stations?search=33018&fuel=1&brandId=14&maxAge=8
+
+Ours :
+
 # TODO Havent Figured out && Maybe not needed :
 
 #### COORDINATES
