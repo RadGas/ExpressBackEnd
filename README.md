@@ -2,23 +2,21 @@
 
 Back End Service for Application
 
-# Back End Routing for API
-
 # Coordinates :
 
-## Get gas stations near coordinate & Gas type 1
+#### Get gas stations near coordinate & Gas type 1
 
 Host : /assets-v2/api/stations?lat=25.8925211&lng=-80.3352364&fuel=1
 
 Ours : http://localhost:3000/api/coordinates?lat=25.8925211&lng=-80.3352364&fuel=1
 
-## Get gas stations near coordinate & advanced search
+#### Get gas stations near coordinate & advanced search
 
 Host : /assets-v2/api/stations?lat=25.8925211&lng=-80.3352364&fuel=1&brandId=14&maxAge=8
 
 Ours : http://localhost:3000/api/coordinates?lat=25.8925211&lng=-80.3352364&fuel=1&brandId=14&maxAge=8
 
-## Get gas trends near coordinates
+#### Get gas trends near coordinates
 
 Host : /assets-v2/api/trends?lat=25.8925211&lng=-80.3352364
 
@@ -26,7 +24,7 @@ Ours : http://localhost:3000/api/trends?lat=25.8925211&lng=-80.3352364
 
 # TODO Havent Figured out && Maybe not needed :
 
-## COORDINATES
+#### COORDINATES
 
 https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=52090&stationIds=52091&stationIds=149725&stationIds=123210&stationIds=52098&stationIds=150088&stationIds=95618&stationIds=52092&stationIds=137383&stationIds=149223
 
