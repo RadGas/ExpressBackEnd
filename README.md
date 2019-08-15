@@ -47,3 +47,7 @@ https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=52103&stationIds=52110&s
 https://www.gasbuddy.com/assets-v2/api/stations?lat=25.8925211&lng=-80.3352364&fuel=1&brandId=14&maxAge=8&cursor=25
 
 https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=27601&stationIds=40391&stationIds=52117&stationIds=52587&stationIds=51900&stationIds=45713&stationIds=52634&stationIds=37262&stationIds=52631&stationIds=85728&stationIds=52130&stationIds=52172&stationIds=110459&stationIds=51961&stationIds=52111&stationIds=31672&stationIds=52168&stationIds=51936
+
+####ZipCode:
+
+https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=113088&stationIds=153012&stationIds=148139&stationIds=138342&stationIds=172377&stationIds=52361&stationIds=88084&stationIds=148142&stationIds=105650&stationIds=151568&stationIds=71241&stationIds=95777
