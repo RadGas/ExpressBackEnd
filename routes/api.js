@@ -12,13 +12,19 @@ router.get("/", function(req, res, next) {
 });
 
 /*
-* only for /city/CITYNAME/gastype
+* only for /city/
+?search=cityName&fuel=#&brandId=#&maxAge=#
 !Gets gas stations based on city
 ? Be warned this works somehow :)
 */
-router.get("/city/:CITY/:GASTYPE", async function(req, res, next) {
-  const { GASTYPE, CITY } = req.params;
-  await getGasStations(CITY, gasType, req.query.brandId, req.query.maxAge);
+router.get("/city", async function(req, res, next) {
+  let gasType = getGasType(req.query.fuel, res);
+  await getGasStations(
+    req.query.search,
+    gasType,
+    req.query.brandId,
+    req.query.maxAge
+  );
   //display response/results to page
   res.send(result);
   next();
@@ -48,14 +54,15 @@ function getGasType(GASTYPE, res) {
 }
 
 /*
-* only for /zipcode/#/gastype
+* only for /zipcode/#
+?fuel=#&brandId=#&maxAge=#
 !Gets gas stations based on zipcode
 ? Be warned this works somehow :)
 */
-router.get("/zipcode/:ZIPCODE/:GASTYPE", async function(req, res, next) {
+router.get("/zipcode/:ZIPCODE", async function(req, res, next) {
   // res.send(req.query);
-  const { ZIPCODE, GASTYPE } = req.params;
-  let gasType = getGasType(GASTYPE, res);
+  const { ZIPCODE } = req.params;
+  let gasType = getGasType(req.params.fuel, res);
 
   await getGasStations(ZIPCODE, gasType, req.query.brandId, req.query.maxAge);
   console.log("SHOULD WORK with gas types", result);
@@ -124,15 +131,19 @@ router.get("/trends/:ZIPorCity", async function(req, res, next) {
 });
 
 /**
+ * Gets the trends
+ * * for /trends
+ * ?lat=#&lng=#
  * ! Gets the price history at cordinates
  * TODO LOOKINTO
  * ? Unsure if Gets the price history?
  */
-router.get("/trends/:LATITUDE/:LONGITUDE", async function(req, res, next) {
+router.get("/trends", async function(req, res, next) {
   try {
-    const { LATITUDE, LONGITUDE } = req.params;
     const response = await axios.get(
-      `https://www.gasbuddy.com/assets-v2/api/trends?lat=${LATITUDE}&lng=${LONGITUDE}`
+      `https://www.gasbuddy.com/assets-v2/api/trends?lat=${req.query.lat}&lng=${
+        req.query.lng
+      }`
     );
 
     res.send(response.data);
