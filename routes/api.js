@@ -82,10 +82,10 @@ router.get("/brands", async function(req, res, next) {
 });
 
 /*
-* only for /coordinates/latitude/longitude/gastype
+* only for /coordinates
+?lat=#&lng=#&brandId=#&maxAge=#
 ** supports maxAge and brandId queries
 !Gets gas stations based on coordinates
-? Be warned this works somehow :)
 */
 router.get("/coordinates/", async function(req, res, next) {
   // res.send(req.query);
