@@ -64,8 +64,8 @@ router.get("/zipcode/:ZIPCODE/:GASTYPE", async function(req, res, next) {
 });
 
 /**
- * ! Gets the brands
- * TODO figure out what this actually is getting
+ * only for /brands
+ * ! Gets a list of brand gas stations
  */
 router.get("/brands", async function(req, res, next) {
   try {
