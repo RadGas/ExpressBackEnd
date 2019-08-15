@@ -174,7 +174,7 @@ router.get("/gasstation", async function(req, res, next) {
     }
     const response = await axios.get(url);
     if ((amount = req.query.highestPrice)) {
-      response = response.data.filter(function(amount) {
+      response.data = Array.from(response.data).filter(function(amount) {
         return response.data.fuels.prices.price <= amount;
       });
     }
