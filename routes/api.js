@@ -74,10 +74,12 @@ router.get("/zipcode/:ZIPCODE", async function(req, res, next) {
  * ! Gets a list of brand gas stations
  */
 router.get("/brands", async function(req, res, next) {
+  let url = "https://www.gasbuddy.com/assets-v2/api/brands";
+  if (req.query.brandIds) {
+    url += `?brandIds=${req.query.brandIds}`;
+  }
   try {
-    const response = await axios.get(
-      `https://www.gasbuddy.com/assets-v2/api/brands`
-    );
+    const response = await axios.get(url);
 
     res.send(response.data);
   } catch (error) {

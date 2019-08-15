@@ -44,6 +44,18 @@ Host : assets-v2/api/stations?search=miami&fuel=1&brandId=14&maxAge=8
 
 Ours : http://localhost:3000/api/city?search=miami&fuel=1&brandId=14&maxAge=8
 
+#### Get trends on city
+
+Host :
+https://www.gasbuddy.com/assets-v2/api/trends?search=miami
+
+Ours : http://localhost:3000/api/trends/miami
+
+# Brands :
+
+Host : /assets-v2/api/brands?brandIds=2013
+Ours : http://localhost:3000/api/brands?brandIds=2013
+
 # TODO Havent Figured out && Maybe not needed :
 
 #### COORDINATES
