@@ -28,7 +28,7 @@ Ours : http://localhost:3000/api/trends?lat=25.8925211&lng=-80.3352364
 
 Host : assets-v2/api/stations?search=33018&fuel=1&brandId=14&maxAge=8
 
-Ours :
+Ours : http://localhost:3000/api/zipcode/33018?fuel=1&brandId=14&maxAge=8
 
 # TODO Havent Figured out && Maybe not needed :
 
