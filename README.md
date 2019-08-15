@@ -58,7 +58,7 @@ Ours : http://localhost:3000/api/brands?brandIds=2013
 
 # TODO Havent Figured out && Maybe not needed :
 
-#### COORDINATES
+#### COORDINATES:
 
 https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=52090&stationIds=52091&stationIds=149725&stationIds=123210&stationIds=52098&stationIds=150088&stationIds=95618&stationIds=52092&stationIds=137383&stationIds=149223
 
@@ -68,6 +68,14 @@ https://www.gasbuddy.com/assets-v2/api/stations?lat=25.8925211&lng=-80.3352364&f
 
 https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=27601&stationIds=40391&stationIds=52117&stationIds=52587&stationIds=51900&stationIds=45713&stationIds=52634&stationIds=37262&stationIds=52631&stationIds=85728&stationIds=52130&stationIds=52172&stationIds=110459&stationIds=51961&stationIds=52111&stationIds=31672&stationIds=52168&stationIds=51936
 
-####ZipCode:
+#### ZipCode:
 
 https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=113088&stationIds=153012&stationIds=148139&stationIds=138342&stationIds=172377&stationIds=52361&stationIds=88084&stationIds=148142&stationIds=105650&stationIds=151568&stationIds=71241&stationIds=95777
+
+### City:
+
+https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=52470&stationIds=52462
+
+https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=45923&stationIds=45916&stationIds=52294&stationIds=52267&stationIds=133123&stationIds=52290&stationIds=52292&stationIds=52271&stationIds=147686&stationIds=151083&stationIds=133120&stationIds=122542&stationIds=52301&stationIds=139194&stationIds=132876&stationIds=45945&stationIds=173999&stationIds=158698&stationIds=154165&stationIds=133122&stationIds=113201&stationIds=52291&stationIds=117295&stationIds=84321
+
+https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=131484&stationIds=154024&stationIds=102873&stationIds=52298&stationIds=52273&stationIds=122335&stationIds=52279&stationIds=171295&stationIds=149192&stationIds=51905&stationIds=101820&stationIds=51910&stationIds=52282&stationIds=133125&stationIds=122543&stationIds=160048&stationIds=132650&stationIds=84320&stationIds=133124&stationIds=131651&stationIds=52289&stationIds=160513&stationIds=153487&stationIds=152784
