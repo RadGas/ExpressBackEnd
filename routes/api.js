@@ -83,21 +83,17 @@ router.get("/brands", async function(req, res, next) {
 
 /*
 * only for /coordinates/latitude/longitude/gastype
+** supports maxAge and brandId queries
 !Gets gas stations based on coordinates
 ? Be warned this works somehow :)
 */
-router.get("/coordinates/:LATITUDE/:LONGITUDE/:GASTYPE", async function(
-  req,
-  res,
-  next
-) {
-  // res.send(req.params.ZIPCODE);
-  const { LATITUDE, LONGITUDE, GASTYPE } = req.params;
-  let gasType = getGasType(GASTYPE, res);
+router.get("/coordinates/", async function(req, res, next) {
+  // res.send(req.query);
+  let gasType = getGasType(req.query.fuel, res);
 
   await getGasStationsAtCoordinates(
-    LATITUDE,
-    LONGITUDE,
+    req.query.lat,
+    req.query.lng,
     gasType,
     req.query.brandId,
     req.query.maxAge
