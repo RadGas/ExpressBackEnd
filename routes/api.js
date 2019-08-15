@@ -155,6 +155,8 @@ router.get("/trends", async function(req, res, next) {
 });
 
 /**
+ * for /gasstation
+ * ?stationIds..=#&highestPrice=#
  * ! Gets the prices of the gas station
  * TODO Learn to deal with this : https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=155065&stationIds=141110&stationIds=136370&stationIds=149485&stationIds=136523&stationIds=150415&stationIds=153804&stationIds=52105&stationIds=153805&stationIds=118970
  * TODO and this https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=52092&stationIds=123210&stationIds=113088&stationIds=137383&stationIds=95618&stationIds=149725&stationIds=52090&stationIds=150088&stationIds=52110&stationIds=148139
@@ -175,7 +177,9 @@ router.get("/gasstation", async function(req, res, next) {
     const response = await axios.get(url);
     if ((amount = req.query.highestPrice)) {
       response.data.fuels = response.data.fuels.filter(function(station) {
-        return station.prices.price <= amount;
+        console.log("price we are comparing " + station.prices[0].price);
+        console.log();
+        return station.prices[0].price <= amount;
       });
     }
     res.send(response.data);
