@@ -13,39 +13,38 @@ router.get("/", function(req, res, next) {
 
 /*
 * only for /city/CITYNAME/gastype
-!Gets gas stations based on zipcode
+!Gets gas stations based on city
 ? Be warned this works somehow :)
 */
 router.get("/city/:CITY/:GASTYPE", async function(req, res, next) {
-    const {GASTYPE, CITY} = req.params;
-    await getGasStations(CITY, GASTYPE);
+  const { GASTYPE, CITY } = req.params;
+  await getGasStations(CITY, GASTYPE);
   //display response/results to page
   res.send(result);
   next();
 });
 
-
 /*
-* Helper function to determine gas type
+ * Helper function to determine gas type
  */
 function getGasType(GASTYPE, res) {
-    let gasType;
-    if (GASTYPE === "all" || GASTYPE === 0) {
-        gasType = 0;
-        // console.log("Do we get hit?");
-        // res.send({ status: "There's no 0 fam" });
-    } else if (GASTYPE === "regular" || GASTYPE === 1) {
-        gasType = 1;
-    } else if (GASTYPE === "midgrade" || GASTYPE === 2) {
-        gasType = 2;
-    } else if (GASTYPE === "premium" || GASTYPE === 3) {
-        gasType = 3;
-    } else if (GASTYPE === "diesel" || GASTYPE === 4) {
-        gasType = 4;
-    } else {
-        res.send({status: "NEW TYPE OF GAS WOW!?!?!?"});
-    }
-    return gasType;
+  let gasType;
+  if (GASTYPE === "all" || GASTYPE === 0) {
+    gasType = 0;
+    // console.log("Do we get hit?");
+    // res.send({ status: "There's no 0 fam" });
+  } else if (GASTYPE === "regular" || GASTYPE == 1) {
+    gasType = 1;
+  } else if (GASTYPE === "midgrade" || GASTYPE == 2) {
+    gasType = 2;
+  } else if (GASTYPE === "premium" || GASTYPE == 3) {
+    gasType = 3;
+  } else if (GASTYPE === "diesel" || GASTYPE == 4) {
+    gasType = 4;
+  } else {
+    res.send({ status: "NEW TYPE OF GAS WOW!?!?!?" });
+  }
+  return gasType;
 }
 
 /*
@@ -55,8 +54,8 @@ function getGasType(GASTYPE, res) {
 */
 router.get("/zipcode/:ZIPCODE/:GASTYPE", async function(req, res, next) {
   // res.send(req.params.ZIPCODE);
-    const {ZIPCODE, GASTYPE} = req.params;
-    let gasType = getGasType(GASTYPE, res);
+  const { ZIPCODE, GASTYPE } = req.params;
+  let gasType = getGasType(GASTYPE, res);
 
   await getGasStations(ZIPCODE, gasType);
   console.log("SHOULD WORK with gas types", result);
@@ -82,21 +81,24 @@ router.get("/brands", async function(req, res, next) {
   next();
 });
 
-
 /*
 * only for /coordinates/latitude/longitude/gastype
 !Gets gas stations based on coordinates
 ? Be warned this works somehow :)
 */
-router.get("/coordinates/:LATITUDE/:LONGITUDE/:GASTYPE", async function(req, res, next) {
-    // res.send(req.params.ZIPCODE);
-    const {LATITUDE, LONGITUDE, GASTYPE} = req.params;
-    let gasType = getGasType(GASTYPE, res);
+router.get("/coordinates/:LATITUDE/:LONGITUDE/:GASTYPE", async function(
+  req,
+  res,
+  next
+) {
+  // res.send(req.params.ZIPCODE);
+  const { LATITUDE, LONGITUDE, GASTYPE } = req.params;
+  let gasType = getGasType(GASTYPE, res);
 
-    await getGasStationsAtCoordinates(LATITUDE, LONGITUDE, gasType);
-    console.log("SHOULD WORK with gas types", result);
-    res.send(result);
-    next();
+  await getGasStationsAtCoordinates(LATITUDE, LONGITUDE, gasType);
+  console.log("SHOULD WORK with gas types", result);
+  res.send(result);
+  next();
 });
 
 /**
@@ -105,18 +107,18 @@ router.get("/coordinates/:LATITUDE/:LONGITUDE/:GASTYPE", async function(req, res
  * ? Unsure if Gets the price history?
  */
 router.get("/trends/:ZIPorCity", async function(req, res, next) {
-    try {
-        const {ZIPorCity} = req.params;
-        const response = await axios.get(
-            `https://www.gasbuddy.com/assets-v2/api/trends?search=${ZIPorCity}`
-        );
+  try {
+    const { ZIPorCity } = req.params;
+    const response = await axios.get(
+      `https://www.gasbuddy.com/assets-v2/api/trends?search=${ZIPorCity}`
+    );
 
-        res.send(response.data);
-    } catch (error) {
-        console.error(error);
-        return "EVERYTHING WENT TO poop";
-    }
-    next();
+    res.send(response.data);
+  } catch (error) {
+    console.error(error);
+    return "EVERYTHING WENT TO poop";
+  }
+  next();
 });
 
 /**
@@ -125,18 +127,18 @@ router.get("/trends/:ZIPorCity", async function(req, res, next) {
  * ? Unsure if Gets the price history?
  */
 router.get("/trends/:LATITUDE/:LONGITUDE", async function(req, res, next) {
-    try {
-        const {LATITUDE, LONGITUDE} = req.params;
-        const response = await axios.get(
-            `https://www.gasbuddy.com/assets-v2/api/trends?lat=${LATITUDE}&lng=${LONGITUDE}`
-        );
+  try {
+    const { LATITUDE, LONGITUDE } = req.params;
+    const response = await axios.get(
+      `https://www.gasbuddy.com/assets-v2/api/trends?lat=${LATITUDE}&lng=${LONGITUDE}`
+    );
 
-        res.send(response.data);
-    } catch (error) {
-        console.error(error);
-        return "EVERYTHING WENT TO poop";
-    }
-    next();
+    res.send(response.data);
+  } catch (error) {
+    console.error(error);
+    return "EVERYTHING WENT TO poop";
+  }
+  next();
 });
 
 /**
@@ -148,11 +150,9 @@ router.get("/trends/:LATITUDE/:LONGITUDE", async function(req, res, next) {
  */
 router.get("/gasstation/:GASSTATIONID", async function(req, res, next) {
   try {
-      const {GASSTATIONID} = req.params;
-      const response = await axios.get(
-      `https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=${
-        GASSTATIONID
-      }`
+    const { GASSTATIONID } = req.params;
+    const response = await axios.get(
+      `https://www.gasbuddy.com/assets-v2/api/fuels?stationIds=${GASSTATIONID}`
     );
 
     res.send(response.data);
@@ -181,18 +181,18 @@ async function getGasStations(ZIPorCITY, GASTYPE) {
 
 // *helper function FOR stations near coordinates to retrieve GAS
 async function getGasStationsAtCoordinates(LATITUDE, LONGITUDE, GASTYPE) {
-    let endpoint = `https://www.gasbuddy.com/assets-v2/api/stations?lat=${LATITUDE}&lng=${LONGITUDE}`;
-    if (GASTYPE) {
-        endpoint += `&fuel=${GASTYPE}`;
-    }
-    try {
-        const response = await axios.get(endpoint);
+  let endpoint = `https://www.gasbuddy.com/assets-v2/api/stations?lat=${LATITUDE}&lng=${LONGITUDE}`;
+  if (GASTYPE) {
+    endpoint += `&fuel=${GASTYPE}`;
+  }
+  try {
+    const response = await axios.get(endpoint);
 
-        result = response.data;
-    } catch (error) {
-        console.error(error);
-        return "EVERYTHING WENT TO poop";
-    }
+    result = response.data;
+  } catch (error) {
+    console.error(error);
+    return "EVERYTHING WENT TO poop";
+  }
 }
 
 module.exports = router;
