@@ -18,7 +18,7 @@ router.get("/", function(req, res, next) {
 */
 router.get("/city/:CITY/:GASTYPE", async function(req, res, next) {
   const { GASTYPE, CITY } = req.params;
-  await getGasStations(CITY, GASTYPE);
+  await getGasStations(CITY, gasType, req.query.brandId, req.query.maxAge);
   //display response/results to page
   res.send(result);
   next();
@@ -53,11 +53,11 @@ function getGasType(GASTYPE, res) {
 ? Be warned this works somehow :)
 */
 router.get("/zipcode/:ZIPCODE/:GASTYPE", async function(req, res, next) {
-  // res.send(req.params.ZIPCODE);
+  // res.send(req.query);
   const { ZIPCODE, GASTYPE } = req.params;
   let gasType = getGasType(GASTYPE, res);
 
-  await getGasStations(ZIPCODE, gasType);
+  await getGasStations(ZIPCODE, gasType, req.query.brandId, req.query.maxAge);
   console.log("SHOULD WORK with gas types", result);
   res.send(result);
   next();
@@ -95,7 +95,13 @@ router.get("/coordinates/:LATITUDE/:LONGITUDE/:GASTYPE", async function(
   const { LATITUDE, LONGITUDE, GASTYPE } = req.params;
   let gasType = getGasType(GASTYPE, res);
 
-  await getGasStationsAtCoordinates(LATITUDE, LONGITUDE, gasType);
+  await getGasStationsAtCoordinates(
+    LATITUDE,
+    LONGITUDE,
+    gasType,
+    req.query.brandId,
+    req.query.maxAge
+  );
   console.log("SHOULD WORK with gas types", result);
   res.send(result);
   next();
@@ -164,10 +170,16 @@ router.get("/gasstation/:GASSTATIONID", async function(req, res, next) {
 });
 
 // *helper function to retrieve zipcode or city gas station info
-async function getGasStations(ZIPorCITY, GASTYPE) {
+async function getGasStations(ZIPorCITY, GASTYPE, BRANDID, MAXAGE) {
   let endpoint = `https://www.gasbuddy.com/assets-v2/api/stations?search=${ZIPorCITY}`;
   if (GASTYPE) {
     endpoint += `&fuel=${GASTYPE}`;
+  }
+  if (BRANDID) {
+    endpoint += `&brandId=${BRANDID}`;
+  }
+  if (MAXAGE) {
+    endpoint += `&maxAge=${MAXAGE}`;
   }
   try {
     const response = await axios.get(endpoint);
@@ -180,10 +192,22 @@ async function getGasStations(ZIPorCITY, GASTYPE) {
 }
 
 // *helper function FOR stations near coordinates to retrieve GAS
-async function getGasStationsAtCoordinates(LATITUDE, LONGITUDE, GASTYPE) {
+async function getGasStationsAtCoordinates(
+  LATITUDE,
+  LONGITUDE,
+  GASTYPE,
+  BRANDID,
+  MAXAGE
+) {
   let endpoint = `https://www.gasbuddy.com/assets-v2/api/stations?lat=${LATITUDE}&lng=${LONGITUDE}`;
   if (GASTYPE) {
     endpoint += `&fuel=${GASTYPE}`;
+  }
+  if (BRANDID) {
+    endpoint += `&brandId=${BRANDID}`;
+  }
+  if (MAXAGE) {
+    endpoint += `&maxAge=${MAXAGE}`;
   }
   try {
     const response = await axios.get(endpoint);
