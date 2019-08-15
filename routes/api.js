@@ -130,7 +130,7 @@ router.get("/trends/:ZIPorCity", async function(req, res, next) {
   }
 });
 
-/** Gets station information around you
+/** Gets gas price history
  * Gets the trends for coordinates
  * * for /trends
  * ?lat=#&lng=#

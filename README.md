@@ -16,7 +16,7 @@ Host : /assets-v2/api/stations?lat=25.8925211&lng=-80.3352364&fuel=1&brandId=14&
 
 Ours : http://localhost:3000/api/coordinates?lat=25.8925211&lng=-80.3352364&fuel=1&brandId=14&maxAge=8
 
-#### Get gas trends(get gas station near you) near coordinates
+#### Get gas trends(get gas price history) near coordinates
 
 Host : /assets-v2/api/trends?lat=25.8925211&lng=-80.3352364
 
