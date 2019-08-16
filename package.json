@@ -1,10 +1,14 @@
 {
   "name": "radgas",
   "version": "0.0.0",
+  "homepage": "https://RadGas.io/ExpressBackEnd",
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
     "debug": "SET DEBUG=radgas:* & nodemon start"
+  },
+  "engines": {
+    "node": "12.4.x"
   },
   "dependencies": {
     "axios": "^0.19.0",
