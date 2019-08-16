@@ -113,13 +113,15 @@ router.get(
     next();
   },
   async function(req, res, next) {
-    result.stations = result.stations.forEach(station => {
+    result.stations.forEach(station => {
+      console.log("A station! : " + station.latitude);
       station.miles = distanceInMilesBetweenEarthCoordinates(
         req.query.lat,
         req.query.lng,
         station.latitude,
         station.longitude
       );
+      console.log("This is the current result", result);
     });
     res.send(result);
   }
