@@ -95,21 +95,35 @@ router.get("/brands", async function(req, res, next) {
 ** supports maxAge and brandId queries
 !Gets gas stations based on coordinates
 */
-router.get("/coordinates/", async function(req, res, next) {
-  // res.send(req.query);
-  let gasType = getGasType(req.query.fuel, res);
+router.get(
+  "/coordinates/",
+  async function(req, res, next) {
+    // res.send(req.query);
+    let gasType = getGasType(req.query.fuel, res);
 
-  await getGasStationsAtCoordinates(
-    req.query.lat,
-    req.query.lng,
-    gasType,
-    req.query.brandId,
-    req.query.maxAge
-  );
-  console.log("SHOULD WORK with gas types", result);
-  res.send(result);
-  next();
-});
+    await getGasStationsAtCoordinates(
+      req.query.lat,
+      req.query.lng,
+      gasType,
+      req.query.brandId,
+      req.query.maxAge
+    );
+    // console.log("SHOULD WORK with gas types", result);
+    // res.send(result);
+    next();
+  },
+  async function(req, res, next) {
+    result.stations = result.stations.forEach(station => {
+      station.miles = distanceInMilesBetweenEarthCoordinates(
+        req.query.lat,
+        req.query.lng,
+        station.latitude,
+        station.longitude
+      );
+    });
+    res.send(result);
+  }
+);
 
 /**
  * ! Gets the price history at city or zip
