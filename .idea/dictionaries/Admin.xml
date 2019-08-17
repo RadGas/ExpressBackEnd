@@ -2,9 +2,11 @@
   <dictionary name="Admin">
     <words>
       <w>axios</w>
+      <w>brandid</w>
       <w>cityname</w>
       <w>gasstationid</w>
       <w>gastype</w>
+      <w>maxage</w>
       <w>midgrade</w>
       <w>zipcode</w>
     </words>
